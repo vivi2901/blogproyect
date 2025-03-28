@@ -2,9 +2,11 @@
 export interface Blog {
   id: string;
   title: string;
-  image: string;
   description: string;
-  address: string;
-  score: number;
-  ratings: number;
+  content: string;
+  author_name: string;
+  publication_date: string;
+  views_count: number;
+  comments_count: number;
+  image_url: string;
 }
