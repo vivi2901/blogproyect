@@ -1,0 +1,19 @@
+{
+  "extends": ["next", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": [
+      "warn",
+      {
+        "printWidth": 100,
+        "singleQuote": true,
+        "semi": true,
+        "tabWidth": 2,
+        "trailingComma": "all",
+        "bracketSpacing": true,
+        "arrowParens": "always",
+        "endOfLine": "auto"
+      }
+    ]
+  }
+}
