@@ -16,7 +16,7 @@ interface BlogCardProps {
 
 export default function BlogCard({ blog }: BlogCardProps) {
   return (
-    <div className="w-full flex justify-center items-center bg-gray-100">
+    <div className="w-full flex justify-center items-center">
       <div className="max-w-4xl w-full overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg flex m-2">
         <img src={blog.image_url} alt={blog.title} className="w-1/3 h-auto object-cover" />
 
@@ -52,7 +52,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
               href={`/${blog.id}`}
               className="inline-block bg-teal-600 px-4 py-2 text-white rounded-md hover:bg-teal-700 transition-all"
             >
-              Read More
+              Leer mas
             </Link>
           </div>
         </div>
