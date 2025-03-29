@@ -27,11 +27,7 @@ export default async function HomePage({
       <SearchBox />
       <section className="wrap">
         {blogs.length > 0 ? (
-          blogs.map((blog) => (
-            <Link href={`/${blog.id}`} key={blog.id}>
-              <BlogCard blog={blog} />
-            </Link>
-          ))
+          blogs.map((blog) => <BlogCard key={blog.id} blog={blog} />)
         ) : (
           <p>No se encontraron resultados para "{q}".</p>
         )}
