@@ -6,7 +6,6 @@ const api = {
     //await sleep(750);
     const [, ...data] = await fetch(
       'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqll46UrjPNioS4Zc-z7eopQbzMq0IonQ5ih8nA2LJk3g4xxTG6gGSMR_QYzKTyrS5DBbAjXo1zbBH/pub?output=csv',
-      { next: { revalidate: 20 } },
     )
       .then((res) => res.text())
       .then((text) => text.split('\n'));
@@ -47,6 +46,11 @@ const api = {
     }
 
     return blog;
+  },
+  search: async (query: string = ''): Promise<Blog[]> => {
+    const results = await api.list();
+
+    return results.filter((blog) => blog.title.toLowerCase().includes(query.toLowerCase()));
   },
 };
 
