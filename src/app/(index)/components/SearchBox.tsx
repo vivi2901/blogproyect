@@ -1,29 +1,23 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function SearchBox() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const [query, setQuery] = useState('');
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-    const query = formData.get('query')?.toString().trim();
-
-    if (query) {
-      router.push(`/?q=${query}`);
-    } else {
-      router.push('/');
-    }
+    router.push(`/?q=${query.trim()}`);
   }
 
   return (
     <form className="mb-4 inline-flex gap-2" onSubmit={handleSubmit}>
       <input
         className="px-2"
-        defaultValue={searchParams.get('q') || ''}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
         name="query"
         type="text"
         placeholder="Search"
