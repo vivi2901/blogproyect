@@ -3,5 +3,5 @@
 export default function ErrorPage({ error }: { error: Error }) {
   console.error(error);
 
-  return <div>Something went wrong, try again!</div>;
+  return <div>Algo salió mal, ¡inténtalo de nuevo!</div>;
 }

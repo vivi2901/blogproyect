@@ -1,10 +1,12 @@
 import { Blog } from './types';
-//const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, Math.random() * ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, Math.random() * ms));
 
 const api = {
   list: async (): Promise<Blog[]> => {
+    //await sleep(750);
     const [, ...data] = await fetch(
       'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqll46UrjPNioS4Zc-z7eopQbzMq0IonQ5ih8nA2LJk3g4xxTG6gGSMR_QYzKTyrS5DBbAjXo1zbBH/pub?output=csv',
+      { next: { revalidate: 20 } },
     )
       .then((res) => res.text())
       .then((text) => text.split('\n'));
@@ -41,7 +43,7 @@ const api = {
     const blog = blogs.find((blog) => blog.id === id);
 
     if (!blog) {
-      throw new Error(`Blog with id ${id} not found`);
+      throw new Error(`Blog con id ${id} no encontrado`);
     }
 
     return blog;

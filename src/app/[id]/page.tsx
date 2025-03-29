@@ -1,5 +1,23 @@
 import api from '@/src/api';
 
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const blog = await api.fetch(id);
+
+  return {
+    title: `${blog.title} - Blog`,
+    description: blog.description,
+  };
+}
+
+export async function generateStaticParams() {
+  const blogs = await api.list();
+
+  return blogs.map((blog) => ({
+    id: blog.id,
+  }));
+}
+
 export default async function BlogPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const blog = await api.fetch(id);

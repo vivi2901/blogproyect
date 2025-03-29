@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Blog - Hello World',
-  description: 'The best blogs in the world',
-  keywords: ['blog', 'food', 'eat', 'dinner', 'lunch'],
+  title: 'Blog Viajes Vivian',
+  description: 'Blog de mis viajes',
+  keywords: ['blog', 'viajes', 'lugares', 'bolivia', 'turismo'],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
