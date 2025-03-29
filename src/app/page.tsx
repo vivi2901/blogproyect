@@ -1,5 +1,5 @@
-import Header from '../(index)/components/Header';
-import BlogCard from '../(index)/components/BlogCard';
+import Header from './components/Header';
+import BlogCard from './components/BlogCard';
 import Link from 'next/link';
 import api from '@/src/api';
 
