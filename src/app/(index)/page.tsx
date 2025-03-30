@@ -24,7 +24,9 @@ export default async function HomePage({
   return (
     <main>
       <Header />
-      <SearchBox />
+      <div className="flex justify-center">
+        <SearchBox />
+      </div>
       <section className="wrap">
         {blogs.length > 0 ? (
           blogs.map((blog) => <BlogCard key={blog.id} blog={blog} />)

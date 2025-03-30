@@ -15,19 +15,19 @@ export default function SearchBox() {
 
   return (
     <form className="mb-5 mt-5 inline-flex" onSubmit={handleSubmit}>
-      <div className="flex items-center border-[var(--custom-brown)] rounded">
+      <div className="flex items-center border border-yellow-800 rounded-lg">
         {' '}
         <input
-          className="px-4 py-2 rounded-l-full border-[var(--custom-brown)] outline-none"
+          className="px-4 !important focus:outline-none"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           name="query"
           type="text"
           placeholder="Buscar"
         />
-        <button className="bg-white/20 p-2 rounded-r-full" type="submit">
+        <button className="bg-yellow-800 p-4 rounded-r-md" type="submit">
           {' '}
-          <FaSearch className="text-black" />
+          <FaSearch className="text-white" />
         </button>
       </div>
     </form>
