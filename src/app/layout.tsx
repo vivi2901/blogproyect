@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="container m-auto">
-        <main className="py-20">{children}</main>
+      <body>
+        <main>{children}</main>
         <footer className="text-center leading-[3rem] opacity-70">
           © {new Date().getFullYear()} BlogVivianEspindolaGoIT
         </footer>
