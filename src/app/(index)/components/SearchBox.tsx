@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
 
 export default function SearchBox() {
   const router = useRouter();
@@ -13,18 +14,22 @@ export default function SearchBox() {
   }
 
   return (
-    <form className="mb-4 inline-flex gap-2" onSubmit={handleSubmit}>
-      <input
-        className="px-2"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        name="query"
-        type="text"
-        placeholder="Search"
-      />
-      <button className="bg-white/20 p-2" type="submit">
-        Search
-      </button>
+    <form className="mb-5 mt-5 inline-flex" onSubmit={handleSubmit}>
+      <div className="flex items-center border-[var(--custom-brown)] rounded">
+        {' '}
+        <input
+          className="px-4 py-2 rounded-l-full border-[var(--custom-brown)] outline-none"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          name="query"
+          type="text"
+          placeholder="Buscar"
+        />
+        <button className="bg-white/20 p-2 rounded-r-full" type="submit">
+          {' '}
+          <FaSearch className="text-black" />
+        </button>
+      </div>
     </form>
   );
 }
