@@ -15,7 +15,7 @@ export default function SearchBox() {
 
   return (
     <form className="mb-5 mt-5 w-full max-w-6xl" onSubmit={handleSubmit}>
-      <div className="flex items-center border border-yellow-800 rounded-lg w-full">
+      <div className="flex items-center border border-yellow-800 rounded-lg w-full caret-yellow-800">
         <input
           className="px-4 flex-1 focus:outline-none"
           value={query}
