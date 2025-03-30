@@ -46,12 +46,12 @@ export default function BlogCard({ blog }: BlogCardProps) {
             </Link>
           </h2>
 
-          <div className="mt-2 flex justify-between items-center text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-md">
+          <div className="mt-2 flex justify-between items-center text-sm font-[Plus_Jakarta_Sans] text-gray-600 bg-gray-100 px-3 py-1 rounded-md">
             <span>
               por <span className="font-semibold text-teal-600">{blog.author_name}</span> en{' '}
               {blog.publication_date}
             </span>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 font-[Plus_Jakarta_Sans]">
               <div className="flex items-center gap-1">
                 <LuMessageSquareMore />
                 <span>{blog.comments_count}</span>

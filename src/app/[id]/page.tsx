@@ -25,24 +25,37 @@ export default async function BlogPage({ params }: { params: Promise<{ id: strin
   return (
     <main>
       <header
-        className="relative flex w-full items-center justify-center bg-cover bg-center bg-no-repeat before:absolute before:inset-0 before:bg-black before:opacity-50"
+        className="relative flex w-full items-start justify-start bg-cover bg-start bg-no-repeat before:absolute before:inset-0 before:bg-black before:opacity-50"
         style={{ backgroundImage: `url(${blog.image_url})` }}
       >
-        <section className="relative w-auto py-32 px-4 text-center rounded-lg">
+        <section className="relative w-auto py-32 px-32 text-center rounded-lg">
           <h1 className="text-4xl font-bold text-white">{blog.title}</h1>
-          <div className="absolute left-1/2 bottom-0 -translate-x-1/2 transform bg-teal-600 px-5 py-2 rounded-t-lg">
-            <span className="text-gray-900">Mi </span>
-            <span className="text-gray-900">Blog</span>
-          </div>
         </section>
       </header>
 
-      <div className="max-w-4xl mx-auto p-6">
-        <p className="text-sm text-gray-500 mt-1">
-          {blog.comments_count} comentarios | {blog.views_count} vistas | {blog.publication_date}
-        </p>
+      <div className="w-full flex justify-center items-center">
+        <div className="max-w-6xl w-full overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg m-2">
+          <div className="max-w-5xl mx-auto p-6">
+            <div className="grid grid-cols-3 text-start text-sm text-gray-500 font-semibold">
+              <span>Comentarios</span>
+              <span>Vistas</span>
+              <span>Fecha</span>
+            </div>
+            <div className="grid grid-cols-3 text-start font-[Plus_Jakarta_Sans] text-2xl text-gray-700">
+              <span>{blog.comments_count}</span>
+              <span>{blog.views_count} vistas</span>
+              <span>{blog.publication_date}</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <article className="mt-6 text-gray-700 leading-relaxed">{blog.content}</article>
+      <div className="w-full flex justify-center items-center">
+        <div className="max-w-6xl w-full overflow-hidden flex m-2">
+          <article className="mt-6 text-gray-700 leading-relaxed text-lg text-justify">
+            {blog.content}
+          </article>
+        </div>
       </div>
     </main>
   );
