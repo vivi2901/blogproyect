@@ -1,4 +1,6 @@
 import api from '@/src/api';
+import Link from 'next/link';
+import { IoIosArrowRoundBack } from 'react-icons/io';
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -28,8 +30,27 @@ export default async function BlogPage({ params }: { params: Promise<{ id: strin
         className="relative flex w-full items-start justify-start bg-cover bg-start bg-no-repeat before:absolute before:inset-0 before:bg-black before:opacity-50"
         style={{ backgroundImage: `url(${blog.image_url})` }}
       >
-        <section className="relative w-auto py-32 px-32 text-center rounded-lg">
+        <section className="relative w-auto py-32 px-24 pl-24 text-left rounded-lg">
+          <Link
+            href={`/`}
+            className="pb-8 inline-block text-white hover:text-teal-300 transition-all"
+          >
+            <IoIosArrowRoundBack className="inline-block mr-1" />
+            Regresar
+          </Link>
+          <div className="text-white">
+            <Link href="/" className="hover:underline">
+              Viajes
+            </Link>{' '}
+            /{' '}
+            <Link href="/" className="hover:underline">
+              Bolivia
+            </Link>
+          </div>
+
           <h1 className="text-4xl font-bold text-white">{blog.title}</h1>
+
+          <p className="mt-2 text-lg text-gray-300">{blog.description}</p>
         </section>
       </header>
 
