@@ -1,38 +1,31 @@
+import Papa from 'papaparse';
 import { Blog } from './types';
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, Math.random() * ms));
 
 const api = {
   list: async (): Promise<Blog[]> => {
-    //await sleep(750);
-    const [, ...data] = await fetch(
+    const response = await fetch(
       'https://docs.google.com/spreadsheets/d/e/2PACX-1vSqll46UrjPNioS4Zc-z7eopQbzMq0IonQ5ih8nA2LJk3g4xxTG6gGSMR_QYzKTyrS5DBbAjXo1zbBH/pub?output=csv',
-    )
-      .then((res) => res.text())
-      .then((text) => text.split('\n'));
-    const blogs: Blog[] = data.map((row) => {
-      const [
-        id,
-        title,
-        description,
-        content,
-        author_name,
-        publication_date,
-        views_count,
-        comments_count,
-        image_url,
-      ] = row.split(',');
-      return {
-        id,
-        title,
-        description,
-        content,
-        author_name,
-        publication_date,
-        views_count: Number(views_count),
-        comments_count: Number(comments_count),
-        image_url,
-      };
+    );
+
+    const text = await response.text();
+
+    const parsedData = Papa.parse(text, {
+      header: true,
+      skipEmptyLines: true,
     });
+
+    const blogs: Blog[] = parsedData.data.map((row: any) => ({
+      id: row.id,
+      title: row.title,
+      description: row.description,
+      content: row.content,
+      author_name: row.author_name,
+      publication_date: row.publication_date,
+      views_count: Number(row.views_count),
+      comments_count: Number(row.comments_count),
+      image_url: row.image_url,
+    }));
 
     return blogs;
   },
