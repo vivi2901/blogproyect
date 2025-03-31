@@ -1,25 +1,32 @@
 import Header from './components/Header';
 import BlogCard from './components/BlogCard';
 import SearchBox from '../(index)/components/SearchBox';
+import Pagination from '../(index)/components/Pagination';
 import Link from 'next/link';
 import api from '@/src/api';
 import { unstable_cache } from 'next/cache';
 
 const fetchBlogs = unstable_cache(
-  async (q: string) => {
-    return api.search(q);
+  async (q: string, page: number, limit: number) => {
+    return api.search(q, page, limit);
   },
   ['blogs'],
   { revalidate: 60 },
 );
 
 export default async function HomePage({
-  searchParams,
+  searchParams: searchParamsPromise,
 }: {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: Promise<{ q?: string; page?: string; limit?: string }>;
 }) {
-  const { q = '' } = await searchParams;
-  const blogs = await fetchBlogs(q);
+  const searchParams = await searchParamsPromise;
+
+  const q = searchParams.q || '';
+  const page = parseInt(searchParams.page || '1', 10);
+  const limit = parseInt(searchParams.limit || '2', 10);
+
+  const { blogs, total } = await fetchBlogs(q, page, limit);
+  const totalPages = Math.ceil(total / limit);
 
   return (
     <main>
@@ -34,6 +41,8 @@ export default async function HomePage({
           <p>No se encontraron resultados para "{q}".</p>
         )}
       </section>
+
+      {totalPages > 1 && <Pagination currentPage={page} totalPages={totalPages} q={q} />}
     </main>
   );
 }

@@ -40,10 +40,23 @@ const api = {
 
     return blog;
   },
-  search: async (query: string = ''): Promise<Blog[]> => {
+
+  search: async (
+    query: string = '',
+    page: number = 1,
+    limit: number = 2,
+  ): Promise<{ blogs: Blog[]; total: number }> => {
     const results = await api.list();
 
-    return results.filter((blog) => blog.title.toLowerCase().includes(query.toLowerCase()));
+    const filteredBlogs = results.filter((blog) =>
+      blog.title.toLowerCase().includes(query.toLowerCase()),
+    );
+
+    const total = filteredBlogs.length;
+    const startIndex = (page - 1) * limit;
+    const paginatedBlogs = filteredBlogs.slice(startIndex, startIndex + limit);
+
+    return { blogs: paginatedBlogs, total };
   },
 };
 

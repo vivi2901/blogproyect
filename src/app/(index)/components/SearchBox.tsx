@@ -1,16 +1,29 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
 export default function SearchBox() {
   const router = useRouter();
-  const [query, setQuery] = useState('');
+  const searchParams = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get('q') || '');
+
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      if (query.trim() !== searchParams.get('q')) {
+        router.push(`/?q=${query.trim()}&page=1`);
+      }
+    }, 10);
+
+    return () => clearTimeout(delayDebounce);
+  }, [query, router, searchParams]);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    router.push(`/?q=${query.trim()}`);
+    if (query.trim() !== searchParams.get('q')) {
+      router.push(`/?q=${query.trim()}&page=1`);
+    }
   }
 
   return (
