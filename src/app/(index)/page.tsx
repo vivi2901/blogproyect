@@ -38,7 +38,13 @@ export default async function HomePage({
         {blogs.length > 0 ? (
           blogs.map((blog) => <BlogCard key={blog.id} blog={blog} />)
         ) : (
-          <p>No se encontraron resultados para "{q}".</p>
+          <div className="w-full flex justify-center items-center">
+            <div className="max-w-6xl w-full overflow-hidden rounded-lg border border-red-800 bg-white shadow-lg flex m-2 p-10">
+              <p>
+                No se encontraron resultados para "<span className="font-semibold">{q}</span>"
+              </p>
+            </div>
+          </div>
         )}
       </section>
 
