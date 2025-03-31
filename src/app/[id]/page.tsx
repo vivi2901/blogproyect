@@ -6,6 +6,13 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const blog = await api.fetch(id);
 
+  if (!blog) {
+    return {
+      title: 'Blog no encontrado - Blog',
+      description: 'El blog que buscas no existe o ha sido eliminado.',
+    };
+  }
+
   return {
     title: `${blog.title} - Blog`,
     description: blog.description,
@@ -23,6 +30,21 @@ export async function generateStaticParams() {
 export default async function BlogPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const blog = await api.fetch(id);
+
+  if (!blog) {
+    return (
+      <main className="flex flex-col items-center justify-center h-screen text-center">
+        <h1 className="text-3xl font-bold text-red-600">Error 404</h1>
+        <p className="text-lg text-gray-700">El blog que buscas no existe o fue eliminado.</p>
+        <Link
+          href="/"
+          className="mt-4 px-6 py-2 bg-yellow-800 text-white rounded-lg hover:bg-yellow-700 transition"
+        >
+          Volver al inicio
+        </Link>
+      </main>
+    );
+  }
 
   return (
     <main>
@@ -47,9 +69,7 @@ export default async function BlogPage({ params }: { params: Promise<{ id: strin
               Bolivia
             </Link>
           </div>
-
           <h1 className="text-4xl font-bold text-white">{blog.title}</h1>
-
           <p className="mt-2 text-lg text-gray-300">{blog.description}</p>
         </section>
       </header>

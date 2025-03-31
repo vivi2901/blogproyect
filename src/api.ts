@@ -30,15 +30,9 @@ const api = {
     return blogs;
   },
 
-  fetch: async (id: Blog['id']): Promise<Blog> => {
+  fetch: async (id: Blog['id']): Promise<Blog | null> => {
     const blogs = await api.list();
-    const blog = blogs.find((blog) => blog.id === id);
-
-    if (!blog) {
-      throw new Error(`Blog con id ${id} no encontrado`);
-    }
-
-    return blog;
+    return blogs.find((blog) => blog.id === id) || null;
   },
 
   search: async (

@@ -41,7 +41,8 @@ export default async function HomePage({
           <div className="w-full flex justify-center items-center">
             <div className="max-w-6xl w-full overflow-hidden rounded-lg border border-red-800 bg-white shadow-lg flex m-2 p-10">
               <p>
-                No se encontraron resultados para "<span className="font-semibold">{q}</span>"
+                No se encontraron resultados para{' '}
+                <span className="font-semibold">{'"' + q + '"'}</span>
               </p>
             </div>
           </div>
