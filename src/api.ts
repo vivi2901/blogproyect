@@ -44,7 +44,7 @@ const api = {
   search: async (
     query: string = '',
     page: number = 1,
-    limit: number = 2,
+    limit: number = 5,
   ): Promise<{ blogs: Blog[]; total: number }> => {
     const results = await api.list();
 

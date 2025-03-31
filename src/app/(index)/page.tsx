@@ -23,7 +23,7 @@ export default async function HomePage({
 
   const q = searchParams.q || '';
   const page = parseInt(searchParams.page || '1', 10);
-  const limit = parseInt(searchParams.limit || '2', 10);
+  const limit = parseInt(searchParams.limit || '5', 10);
 
   const { blogs, total } = await fetchBlogs(q, page, limit);
   const totalPages = Math.ceil(total / limit);
